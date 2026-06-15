@@ -1,0 +1,92 @@
+// Creating posts image
+cd posts
+docker build -t adarsh893/posts:0.0.1 .
+cd k8s
+kubectl apply -f posts.yaml
+
+// Now create deployement post-depl.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: posts
+  template:
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: posts-container
+          image: adarsh893/posts:0.0.1
+
+# apiVersion → Which API handles this resource.
+# kind → Type of resource (Deployment).
+# metadata → Information about the Deployment.
+# name → Deployment name.
+# spec → Desired state of the Deployment.
+# replicas → Number of Pods to maintain.
+# selector → Which Pods this Deployment manages.
+# matchLabels → Labels used to identify Pods.
+# template → Blueprint for creating Pods.
+# template.metadata → Metadata for created Pods.
+# labels → Tags attached to Pods.
+# template.spec → Defines what Pods run.
+# containers → Containers inside the Pod.
+# container name → Name of the container.
+# image → Docker image to execute.
+
+
+// Since changes are made in code so we should always deploy image with latest tag
+// so that no need to change in deployment 
+posts>>docker build -t adarsh893/posts .
+posts>> docker push adarsh893/posts
+k8s>>kubectl apply -f post-depl.yaml
+next time just rollout restart deployment and just build image
+>> kubectl rollout restart deployment posts-depl
+
+//now we will create nodeport service so that to get coneect to outside cluster
+//k8s>> post-srv.yaml
+k8s>>kubectl apply -f post-srv.yaml
+// to get nodeport just check running services
+k8s>>kubectl get services
+---------------------------output------------------
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP          13h
+posts-srv    NodePort    10.106.191.19   <none>        4000:32509/TCP   62s
+----------------------------------------------------
+
+
+// now create  image for event bus
+event-bus>>docker build -t adarsh893/event-bus .
+event-bus>>docker push adarsh893/event-bus
+// Now create deployement in k8s and also cluster ip service so that pods can connect each other
+k8s>> event-bus-depl.yaml (has both objects)
+k8s>>kubectl apply -f event-bus-depl
+// same create cluster ip service for posts pod
+
+// now we can connect to localhost:4005 using axios we have
+// to replace localhost with cluster ip service name
+
+posts>>index.js
+event-bus-cluster-srv:4005 replace localhost:4005
+event-bus>>index.js
+posts-cluster-srv:4000 replace localhost:4000
+
+// since code changes build these images,push  and restart deployment
+// Now create cluster ip service and deployment for query,modearion,comments
+query-cluster-srv:4002<-- localhost:4002
+moderation-cluster-srv:4003<-- localhost:4003 
+comments-cluster-srv:4001<-- localhost:4001
+event-bus-cluster-srv:4005<-- localhost:4005
+posts-cluster-srv:4000<-- localhost:4000
+
+// Now create docker images ,push it and 
+k8s>>kubectl apply -f . (to apply all services and deployement)
+
+
+
+

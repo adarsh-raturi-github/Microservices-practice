@@ -1,0 +1,30 @@
+Posts        → 4000
+Comments     → 4001
+Query        → 4002
+Moderation   → 4003
+Event Bus    → 4005
+
+// on post creation
+{
+    type: "PostCreated",
+    data: post,  --{id,title}
+  }
+// on comment creation
+{
+      type: "CommentCreated",
+      data: comment,  --{postId,id,content}
+}
+// comment moderation completed
+{
+ type:'CommentModerated',
+         data:{
+            ...event.data, ----{postId,id,content}
+            status,
+         }
+}
+//Comment Updated (after moderation)
+ {
+    type: "CommentUpdated",
+    data: comment, ------{postId,id,content,status}
+  };
+

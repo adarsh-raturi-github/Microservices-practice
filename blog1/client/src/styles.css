@@ -1,0 +1,177 @@
+/* styles.css — added styles for Blog App */
+
+/* Container */
+.app-container {
+  width: 100%;
+
+  margin: 24px auto;
+  padding: 28px 36px;
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(250, 247, 255, 0.7)
+  );
+  box-shadow: var(--shadow);
+  box-sizing: border-box;
+}
+
+/* Header */
+h2 {
+  font-family: var(--heading);
+  font-size: 48px;
+  margin: 8px 0 12px;
+  text-align: center;
+  background: linear-gradient(90deg, var(--accent), #5a2dff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 18px 0;
+}
+
+/* Post create */
+.post-create {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 12px;
+  border-radius: 8px;
+}
+.post-create label {
+  color: var(--text);
+  font-weight: 500;
+  margin-right: 8px;
+}
+.post-create .input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.post-create input[type="text"],
+.post-create textarea,
+.comment-input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-h);
+  min-width: 180px;
+}
+
+.button {
+  background: linear-gradient(90deg, var(--accent), #6f43ff);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(106, 57, 255, 0.12);
+}
+.button:active {
+  transform: translateY(1px);
+}
+
+/* Post list grid */
+.post-grid {
+  width: 100%;
+  margin-top: 24px;
+  align-items: start;
+  width: 100%;
+}
+
+.post-card {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 18px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 140px;
+}
+.post-card h4 {
+  margin: 0 0 10px 0;
+  color: var(--text-h);
+}
+.post-card .meta {
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.comment-list {
+  margin-top: 10px;
+}
+.comment-list ul {
+  padding-left: 18px;
+  margin: 6px 0 0 0;
+  color: var(--text);
+}
+
+.comment-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.comment-input {
+  flex: 1 1 auto;
+}
+
+.small-muted {
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .post-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .app-container {
+    padding: 18px;
+  }
+  h2 {
+    font-size: 32px;
+  }
+  .post-create input[type="text"],
+  .post-create textarea {
+    min-width: 120px;
+  }
+  .post-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+/* Utility */
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Small accessibility focus styles */
+input:focus,
+textarea:focus,
+button:focus {
+  outline: 2px solid rgba(106, 57, 255, 0.15);
+  outline-offset: 2px;
+}
+
+/* End of styles.css */

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+        - name: client-container
+          image: adarsh893/client:latest
+
+
+### creating cluster ip service becoz ingress nginx always talk to cluster ip service no pod
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-cluster-srv
+spec:
+  selector:
+    app: client
+  ports:
+    - name: client-port
+      protocol: TCP
+      port: 5173
+      targetPort: 5173
