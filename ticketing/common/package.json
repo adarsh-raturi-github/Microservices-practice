@@ -1,6 +1,6 @@
 {
   "name": "@adarsh-tickets/common",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "files": [
@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "del ./build/*",
     "build": "npm run clean && tsc ",
-    "pub": "git add . && git commit -m \"Updates\" && npm version patch && npm run build && npm publish"
+    "pub": "git add . && git commit -m \"Update package code\" && npm version patch && npm run build && npm publish"
   },
   "keywords": [],
   "author": "",
