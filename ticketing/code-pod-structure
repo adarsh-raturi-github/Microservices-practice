@@ -1,0 +1,2 @@
+1.we have to create deployment for mongo db and cluster ip service 
+so that any service  can interact with it
