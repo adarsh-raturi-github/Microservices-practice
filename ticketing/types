@@ -1,0 +1,7 @@
+all error
+{
+    errors:
+        {message:string,field:string}[]
+    
+}
+
