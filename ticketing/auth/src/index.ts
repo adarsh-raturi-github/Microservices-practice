@@ -6,9 +6,9 @@ import {
   signUpRouter,
 } from "./routes";
 const app = express();
-import { errorHandlerMiddleware } from "./middlewares";
 import mongoose from "mongoose";
 import cookieSession from "cookie-session";
+import { errorHandlerMiddleware } from "@adarsh-tickets/common";
 
 app.set("trust proxy", true);
 app.use(express.json());
@@ -28,15 +28,18 @@ const start = async () => {
   if (!process.env.JWT_KEY) {
     throw new Error("JWT_KEY not found");
   }
+  if (!process.env.MONGO_URI) {
+    throw new Error("MONGO_URI not found");
+  }
   try {
-    await mongoose.connect("mongodb://auth-mongo-cluster-ip-srv:27017/auth");
+    await mongoose.connect(process.env.MONGO_URI);
   } catch (err) {
     console.log(err);
   }
 
   console.log("connect to db");
   app.listen(3000, () => {
-    console.log("Auth service started on port 3000!!!");
+    console.log("Auth service started on port 3000!");
   });
 };
 start();

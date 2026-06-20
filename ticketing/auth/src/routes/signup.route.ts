@@ -1,9 +1,11 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { BadRequestError } from "../errors";
 import { User } from "../models/user.model";
 import jwt from "jsonwebtoken";
-import { validateRequestMiddleware } from "../middlewares";
+import {
+  BadRequestError,
+  validateRequestMiddleware,
+} from "@adarsh-tickets/common";
 const router = express.Router();
 router.post(
   "/api/users/signup",

@@ -1,10 +1,13 @@
 import express, { Request, Response } from "express";
-import { body, validationResult } from "express-validator";
-import { BadRequestError, RequestValidationError } from "../errors";
+import { body } from "express-validator";
+
 import { User } from "../models/user.model";
 import { PasswordManagementHelperService } from "../services";
-import { validateRequestMiddleware } from "../middlewares";
 import jwt from "jsonwebtoken";
+import {
+  BadRequestError,
+  validateRequestMiddleware,
+} from "@adarsh-tickets/common";
 const router = express.Router();
 
 router.post(
