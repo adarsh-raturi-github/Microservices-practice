@@ -1,7 +1,7 @@
 import { AbstractCustomError } from "./custom-error-abstract";
 
 export class NotFoundError extends AbstractCustomError {
-  statusCode = 400;
+  statusCode = 404;
   constructor() {
     super("Not found");
 
