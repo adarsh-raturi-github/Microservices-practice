@@ -24,3 +24,10 @@ spec:
                 name: client-cluster-srv
                 port:
                   number: 3000
+          - path: /api/tickets/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: ticket-cluster-ip-srv
+                port:
+                  number: 3001

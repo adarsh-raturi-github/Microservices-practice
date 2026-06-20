@@ -6,4 +6,4 @@
 .vscode/
 *.env
 **/.next/
-**/secret.txt
+secret.txt

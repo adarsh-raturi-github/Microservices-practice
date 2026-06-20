@@ -1,3 +1,3 @@
-export * from "./error-handler.interface";
-export * from "./user.interface";
-export * from "./base.interface";
+export * from "../../../common/src/interfaces/error-handler.interface";
+export * from "../../../common/src/interfaces/user.interface";
+export * from "../../../common/src/interfaces/base.interface";

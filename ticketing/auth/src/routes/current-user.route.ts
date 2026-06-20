@@ -1,6 +1,5 @@
+import { currentUserMiddleware } from "@adarsh-tickets/common";
 import express, { Request, Response } from "express";
-import { currentUserMiddleware } from "../middlewares";
-import { notAuthenicateMiddleware } from "../middlewares/not-authorize.middleware";
 const router = express.Router();
 
 router.get(

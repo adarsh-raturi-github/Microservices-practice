@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-depl
+  name: ticket-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth
+      app: ticket
   template:
     metadata:
       labels:
-        app: auth
+        app: ticket
     spec:
       containers:
-        - name: auth-container
-          image: adarsh893/auth
+        - name: ticket-container
+          image: adarsh893/ticket
           env:
             - name: JWT_KEY
               valueFrom:
@@ -22,20 +22,18 @@ spec:
                   name: jwt-secret
                   key: JWT_KEY
             - name: MONGO_URI
-              value: "mongodb://auth-mongo-cluster-ip-srv:27017/auth"
+              value: "mongodb://ticket-mongo-cluster-ip-srv:27017/ticket"
 
-
-## cluster ip service
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-cluster-ip-srv
+  name: ticket-cluster-ip-srv
 spec:
   selector:
-    app: auth
+    app: ticket
   ports:
-    - name: auth-port
+    - name: ticket-port
       protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 3001
+      targetPort: 3001
